@@ -1,0 +1,181 @@
+:root {
+    /* Color System from DESIGN.md */
+    --surface: #f8f9fa;
+    --surface-dim: #d9dadb;
+    --surface-bright: #f8f9fa;
+    --surface-container-lowest: #ffffff;
+    --surface-container-low: #f3f4f5;
+    --surface-container: #edeeef;
+    --surface-container-high: #e7e8e9;
+    --surface-container-highest: #e1e3e4;
+    --on-surface: #191c1d;
+    --on-surface-variant: #3d4a3f;
+    --inverse-surface: #2e3132;
+    --inverse-on-surface: #f0f1f2;
+    --outline: #6d7a6e;
+    --outline-variant: #bccabc;
+    --surface-tint: #006d37;
+    --primary: #006d37;
+    --on-primary: #ffffff;
+    --primary-container: #27ae60;
+    --on-primary-container: #00391a;
+    --inverse-primary: #61de8a;
+    --secondary: #4e6073;
+    --on-secondary: #ffffff;
+    --secondary-container: #cfe2f9;
+    --on-secondary-container: #526478;
+    --tertiary: #006397;
+    --on-tertiary: #ffffff;
+    --tertiary-container: #3e9fe3;
+    --on-tertiary-container: #003351;
+    --error: #ba1a1a;
+    --on-error: #ffffff;
+    --error-container: #ffdad6;
+    --on-error-container: #93000a;
+    --primary-fixed: #7efba4;
+    --primary-fixed-dim: #61de8a;
+    --on-primary-fixed: #00210c;
+    --on-primary-fixed-variant: #005228;
+    --secondary-fixed: #d1e4fb;
+    --secondary-fixed-dim: #b5c8df;
+    --on-secondary-fixed: #091d2e;
+    --on-secondary-fixed-variant: #36485b;
+    --tertiary-fixed: #cce5ff;
+    --tertiary-fixed-dim: #92ccff;
+    --on-tertiary-fixed: #001d31;
+    --on-tertiary-fixed-variant: #004b73;
+    --background: #f8f9fa;
+    --on-background: #191c1d;
+    
+    /* Typography */
+    --font-display: 'Metropolis', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    /* Spacing */
+    --container-max: 1280px;
+    --section-padding: 80px;
+    
+    /* Bootstrap Overrides */
+    --bs-body-font-family: var(--font-body);
+    --bs-body-color: var(--on-background);
+    --bs-body-bg: var(--background);
+    --bs-primary: var(--primary);
+    --bs-secondary: var(--secondary);
+    --bs-border-color: var(--outline-variant);
+}
+
+@font-face {
+    font-family: 'Metropolis';
+    src: url('https://fonts.cdnfonts.com/css/metropolis-2') format('woff2');
+    font-weight: 400 700;
+}
+
+body {
+    font-family: var(--font-body);
+    color: var(--on-background);
+    background-color: var(--background);
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Typography Classes */
+.font-display-lg { font-family: var(--font-display); font-size: 48px; font-weight: 700; line-height: 56px; letter-spacing: -0.02em; }
+.font-headline-lg { font-family: var(--font-display); font-size: 32px; font-weight: 600; line-height: 40px; letter-spacing: -0.01em; }
+.font-headline-md { font-family: var(--font-display); font-size: 24px; font-weight: 600; line-height: 32px; }
+.font-body-lg { font-family: var(--font-body); font-size: 18px; font-weight: 400; line-height: 28px; }
+.font-body-md { font-family: var(--font-body); font-size: 16px; font-weight: 400; line-height: 24px; }
+.font-label-md { font-family: var(--font-mono); font-size: 14px; font-weight: 500; line-height: 20px; letter-spacing: 0.02em; }
+.font-headline-lg-mobile { font-family: var(--font-display); font-size: 28px; font-weight: 600; line-height: 36px; }
+
+@media (max-width: 768px) {
+    .font-display-lg { font-size: 28px; line-height: 36px; }
+}
+
+/* Colors */
+.text-primary { color: var(--primary) !important; }
+.text-on-surface { color: var(--on-surface) !important; }
+.text-on-surface-variant { color: var(--on-surface-variant) !important; }
+.text-secondary { color: var(--secondary) !important; }
+.text-tertiary { color: var(--tertiary) !important; }
+.text-white { color: #fff !important; }
+
+.bg-surface { background-color: var(--surface) !important; }
+.bg-surface-container-lowest { background-color: var(--surface-container-lowest) !important; }
+.bg-surface-container-low { background-color: var(--surface-container-low) !important; }
+.bg-surface-container { background-color: var(--surface-container) !important; }
+.bg-surface-container-high { background-color: var(--surface-container-high) !important; }
+.bg-primary-container { background-color: var(--primary-container) !important; }
+.bg-primary { background-color: var(--primary) !important; }
+.bg-on-surface { background-color: var(--on-surface) !important; }
+
+/* Selection */
+::selection { background-color: var(--primary-container); color: var(--on-primary-container); }
+
+/* Custom Utilities */
+.section-padding { padding-top: var(--section-padding); padding-bottom: var(--section-padding); }
+.custom-container { max-width: var(--container-max); margin: 0 auto; padding-left: 1.5rem; padding-right: 1.5rem; }
+.shadow-soft { box-shadow: 0 4px 20px rgba(44, 62, 80, 0.08); }
+.border-outline-variant { border-color: rgba(188, 202, 188, 0.3) !important; }
+.border-outline-variant-50 { border-color: rgba(188, 202, 188, 0.5) !important; }
+
+.hover-lift { transition: transform 0.3s ease; }
+.hover-lift:hover { transform: translateY(-4px); }
+
+/* Glassmorphism Header */
+.glass-header {
+    background-color: rgba(248, 249, 250, 0.8);
+    backdrop-filter: blur(10px);
+}
+
+/* Buttons */
+.btn-primary-custom {
+    background-color: var(--primary-container);
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+.btn-primary-custom:hover {
+    background-color: var(--primary);
+    color: white;
+    opacity: 0.9;
+    transform: scale(0.98);
+}
+.btn-outline-custom {
+    background-color: var(--surface);
+    color: var(--primary);
+    border: 1px solid rgba(0, 109, 55, 0.2);
+    border-radius: 0.5rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+.btn-outline-custom:hover {
+    background-color: var(--surface-container-high);
+}
+
+.nav-link-custom {
+    color: var(--secondary);
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+.nav-link-custom:hover {
+    color: var(--primary);
+}
+.nav-link-custom.active {
+    color: var(--primary);
+    border-bottom: 2px solid var(--primary);
+}
+
+/* Form Inputs */
+.form-control-custom {
+    background-color: var(--surface);
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+}
+.form-control-custom:focus {
+    border-color: var(--primary-container);
+    box-shadow: 0 0 0 4px rgba(39, 174, 96, 0.2);
+    outline: none;
+}

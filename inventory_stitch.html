@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+
+<html lang="tr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Akıllı Sulama - Bitirme Projesi</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<style>
+        @font-face {
+            font-family: 'Metropolis';
+            src: url('https://fonts.cdnfonts.com/css/metropolis-2') format('woff2');
+            font-weight: 400 700;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-container": "#27ae60",
+                        "on-primary-fixed-variant": "#005228",
+                        "surface-container-high": "#e7e8e9",
+                        "tertiary-fixed": "#cce5ff",
+                        "on-secondary-fixed": "#091d2e",
+                        "on-primary-fixed": "#00210c",
+                        "inverse-on-surface": "#f0f1f2",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-highest": "#e1e3e4",
+                        "secondary-fixed-dim": "#b5c8df",
+                        "on-surface": "#191c1d",
+                        "surface-tint": "#006d37",
+                        "tertiary-fixed-dim": "#92ccff",
+                        "outline": "#6d7a6e",
+                        "secondary-container": "#cfe2f9",
+                        "surface-dim": "#d9dadb",
+                        "secondary-fixed": "#d1e4fb",
+                        "on-tertiary-fixed-variant": "#004b73",
+                        "surface": "#f8f9fa",
+                        "surface-container": "#edeeef",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-container": "#526478",
+                        "outline-variant": "#bccabc",
+                        "background": "#f8f9fa",
+                        "secondary": "#4e6073",
+                        "error": "#ba1a1a",
+                        "on-primary": "#ffffff",
+                        "tertiary-container": "#3e9fe3",
+                        "primary-fixed": "#7efba4",
+                        "on-tertiary-fixed": "#001d31",
+                        "primary": "#006d37",
+                        "on-tertiary-container": "#003351",
+                        "error-container": "#ffdad6",
+                        "on-primary-container": "#00391a",
+                        "surface-variant": "#e1e3e4",
+                        "on-error-container": "#93000a",
+                        "on-background": "#191c1d",
+                        "inverse-primary": "#61de8a",
+                        "tertiary": "#006397",
+                        "surface-container-low": "#f3f4f5",
+                        "on-secondary": "#ffffff",
+                        "surface-bright": "#f8f9fa",
+                        "on-surface-variant": "#3d4a3f",
+                        "inverse-surface": "#2e3132",
+                        "on-error": "#ffffff",
+                        "primary-fixed-dim": "#61de8a",
+                        "on-secondary-fixed-variant": "#36485b"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-lg": "32px",
+                        "section-padding": "80px",
+                        "stack-md": "16px",
+                        "container-max": "1280px",
+                        "margin-mobile": "16px",
+                        "stack-sm": "8px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Metropolis"],
+                        "headline-lg-mobile": ["Metropolis"],
+                        "body-md": ["Inter"],
+                        "headline-lg": ["Metropolis"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Metropolis"],
+                        "label-md": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased selection:bg-primary-container selection:text-on-primary-container">
+<!-- Shared Component: TopNavBar -->
+<header class="w-full top-0 sticky z-50 shadow-sm bg-surface/80 dark:bg-inverse-surface/80 backdrop-blur-md">
+<div class="max-w-[1280px] mx-auto flex items-center justify-between px-6 h-20">
+<!-- Brand -->
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed text-3xl" style="font-variation-settings: 'FILL' 1;">eco</span>
+<span class="text-headline-md font-headline-md font-bold text-primary dark:text-primary-fixed">Akıllı Sulama</span>
+</div>
+<!-- Navigation Links (Desktop) -->
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-primary dark:text-primary-fixed font-semibold border-b-2 border-primary pb-1 font-body-md text-body-md active:scale-95 transition-transform hover:opacity-80 transition-all duration-300" href="#hakkinda">Hakkında</a>
+<a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary transition-colors font-body-md text-body-md active:scale-95 transition-transform hover:opacity-80 transition-all duration-300" href="#bitki-rehberi">Bitki Rehberi</a>
+<a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary transition-colors font-body-md text-body-md active:scale-95 transition-transform hover:opacity-80 transition-all duration-300" href="#donanim">Donanım Envanteri</a>
+<a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary transition-colors font-body-md text-body-md active:scale-95 transition-transform hover:opacity-80 transition-all duration-300" href="#iletisim">İletişim</a>
+</nav>
+<!-- Actions -->
+<div class="flex items-center gap-4">
+<a class="hidden md:flex items-center justify-center w-10 h-10 rounded-full text-secondary hover:bg-surface-variant transition-colors hover:opacity-80 transition-all duration-300 active:scale-95 transition-transform" href="https://github.com" target="_blank">
+<span class="material-symbols-outlined">code</span>
+</a>
+<button class="hidden md:flex items-center gap-2 bg-primary-container text-white px-5 py-2.5 rounded-lg hover:opacity-90 transition-opacity font-body-md text-body-md font-semibold active:scale-95 transition-transform hover:opacity-80 transition-all duration-300">
+<span class="material-symbols-outlined">download</span>
+                    Tezi İndir (PDF)
+                </button>
+<button class="md:hidden text-on-surface">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</div>
+</header>
+<main>
+<!-- Hero Section -->
+<section class="relative w-full min-h-[600px] flex items-center justify-center overflow-hidden py-section-padding px-6" id="hakkinda">
+<!-- Blurred Background Image -->
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover filter blur-[12px] opacity-60 scale-105 transform" data-alt="A macro shot of a vibrant green agricultural field in a modern greenhouse, featuring automated smart irrigation systems gently misting healthy crop leaves. Soft, highly diffused white light creates a clean, scientific, yet organic mood. The aesthetic is modern corporate minimalism with glassmorphism overtones, using bright whites and vivid emerald greens to convey trustworthy innovation." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAx8vT_Dm7K9Av4620lkPoCC3o5TYlMbYzgr_3p4HxIwuFLFyZrBIo-WvVbJ7jwRUb0nUsyzhflNNdtx_q0ez7iHhtu41hzRUl_8hzlBYbmLSKL0qP0l0Ve0n3megusioI1glPFPubPKVJNWAmfD8uAqu5EBfC6HRJFmhfKvZSYqeuI05mQU-zEpCBIHtvej-5Ufp6hiNIWSrmwCLwDqYw0uQ7AIuaR_nuCaDg4abyyA9koST1eu7oTxePUsFkR-k3T9BSf5EIHM3g"/>
+<div class="absolute inset-0 bg-gradient-to-b from-surface/40 to-surface/90"></div>
+</div>
+<!-- Hero Content -->
+<div class="relative z-10 max-w-container-max mx-auto text-center flex flex-col items-center gap-stack-lg">
+<div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-surface-container-high/80 backdrop-blur-sm border border-outline-variant/50 text-on-surface-variant font-label-md text-label-md shadow-sm">
+<span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span>
+                    Sistem Aktif: Sensörler Okunuyor
+                </div>
+<h1 class="font-display-lg text-display-lg md:text-[56px] md:leading-[64px] text-on-surface max-w-4xl text-balance drop-shadow-sm">
+                    Akıllı Sulama Sistemi <br/><span class="text-primary">Dijital Portalı</span>
+</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl text-balance">
+                    Bitirme Tezi Dökümantasyonu ve Bitki Rehberi. Otonom tarım teknolojileri ile sürdürülebilir su yönetimi ve optimum bitki büyüme koşullarının incelenmesi.
+                </p>
+<div class="flex flex-wrap items-center justify-center gap-4 pt-4">
+<button class="flex items-center gap-2 bg-primary-container text-white px-8 py-4 rounded-lg hover:bg-primary transition-colors font-body-md font-semibold shadow-lg shadow-primary-container/20">
+<span class="material-symbols-outlined">description</span>
+                        Bitirme Tezi Tam Metnini İndir
+                    </button>
+<a class="flex items-center gap-2 bg-surface text-primary border border-primary/20 px-8 py-4 rounded-lg hover:bg-surface-variant transition-colors font-body-md font-semibold" href="#bitki-rehberi">
+                        Sistemi Keşfet
+                    </a>
+</div>
+</div>
+</section>
+<!-- Bitki Nem Rehberi -->
+<section class="py-section-padding px-6 bg-surface" id="bitki-rehberi">
+<div class="max-w-container-max mx-auto">
+<div class="mb-stack-lg flex flex-col gap-stack-sm md:flex-row md:items-end md:justify-between">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Bitki Nem Rehberi</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2">Sistem tarafından desteklenen referans bitki türleri ve optimum yetişme koşulları.</p>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Kart 1: Çilek -->
+<div class="bg-surface-container-lowest rounded-xl p-4 shadow-[0_4px_20px_rgba(44,62,80,0.08)] border border-outline-variant/30 transition-transform hover:-translate-y-1 duration-300 flex flex-col h-full">
+<div class="h-48 w-full rounded-lg overflow-hidden mb-4">
+<img class="w-full h-full object-cover" data-alt="A close-up view of fresh, ripe red strawberries growing on a lush green plant in a high-tech agricultural setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsv73KXTl8XYBy9Ul0GFtgj2Of0QFesme3l0TS5BA8etNuR3QLd8hR-N2Q3vHcNVwWwM9rLzMibz7qdzwvZt7hi9q4TroWBNlYCVvyc0ej4u1ZNI-JLUxGUz2MvU0RXrEt26BSSfRkKUXVwq6s9bCDbOAQIo6qdF7yDL5hK07qh0S5_roPY1puT8AA89JNmieLLFQ4aPAu6Ogy3UTuQF0fuwEXJRAqFnK7wyTi3dav6CXbWZtKXhOl7LKv21AWkiddaXTM3AyCG74"/>
+</div>
+<div class="flex-grow flex flex-col">
+<div class="flex items-center justify-between mb-2">
+<h3 class="font-headline-md text-headline-md text-on-surface">Çilek</h3>
+<span class="bg-tertiary-container/20 text-tertiary px-3 py-1 rounded-full font-label-md text-[12px]">Meyve</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">Yüzey köklü yapısı sebebiyle düzenli ve hassas sulama gerektirir.</p>
+<div class="mt-auto bg-surface p-4 rounded-lg border border-outline-variant/40 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">water_drop</span>
+<span class="font-body-md text-on-surface font-medium">Sulama Başlangıç Sınırı</span>
+</div>
+<span class="font-label-md text-label-md text-primary bg-primary/10 px-3 py-1 rounded-md">%65</span>
+</div>
+</div>
+</div>
+<!-- Kart 2: Zeytin -->
+<div class="bg-surface-container-lowest rounded-xl p-4 shadow-[0_4px_20px_rgba(44,62,80,0.08)] border border-outline-variant/30 transition-transform hover:-translate-y-1 duration-300 flex flex-col h-full">
+<div class="h-48 w-full rounded-lg overflow-hidden mb-4">
+<img class="w-full h-full object-cover" data-alt="Silvery-green olive tree branches with small developing olives." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfi341XifaHWgsoEk_YKIKwPdLQQ76875wvVrrK5ADKKXOAPIMqdsiHBQPbGsxBgrzVG10NnkD9Nw2xZ4bwpoGlcL4JaEcQRbIUFXTRNC3UEaa8OIEAdKFCeSI5V8f95s-lzWvn0ZZTJqxOzujcM7kKAn9aNf7aDNsuYyftAHmG3YdYf9sjrxVXcjgaKa49w-LI4dZmAZqYdJjhYUs7Uqvnd2rjSGXGioinXaxOtBFBHAysikfrb586Vgr1AEyfsXo-VXDZOgwNwI"/>
+</div>
+<div class="flex-grow flex flex-col">
+<div class="flex items-center justify-between mb-2">
+<h3 class="font-headline-md text-headline-md text-on-surface">Zeytin</h3>
+<span class="bg-tertiary-container/20 text-tertiary px-3 py-1 rounded-full font-label-md text-[12px]">Ağaç</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">Kuraklığa dayanıklı olmasına rağmen ilk gelişim evresinde kontrollü sulama ister.</p>
+<div class="mt-auto bg-surface p-4 rounded-lg border border-outline-variant/40 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">water_drop</span>
+<span class="font-body-md text-on-surface font-medium">Sulama Başlangıç Sınırı</span>
+</div>
+<span class="font-label-md text-label-md text-primary bg-primary/10 px-3 py-1 rounded-md">%45</span>
+</div>
+</div>
+</div>
+<!-- Kart 3: Domates -->
+<div class="bg-surface-container-lowest rounded-xl p-4 shadow-[0_4px_20px_rgba(44,62,80,0.08)] border border-outline-variant/30 transition-transform hover:-translate-y-1 duration-300 flex flex-col h-full">
+<div class="h-48 w-full rounded-lg overflow-hidden mb-4">
+<img class="w-full h-full object-cover" data-alt="Clusters of vibrant cherry tomatoes hanging from a vibrant green vine." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEkHgunz_OrT3EbLeqSu8eigSuW3bWWUQBbPPbWfsDTibtg8MF3YwL8UHVSDFgm75Lwl0C9NAlC-GLwwexvM88MfUo22G-9s-0RGKRCQtbhYcNhHtCA4FvzucIAifEW9SkamJYpzoAk0WToYRgoKNilg_hx2_gOyenaXDSDbzbA8gYErNfvr8v0szs72awbQe8u0V_-VEY93aYMpI-LjBhZ76LqWFK3HMpemqlkAnKmQdwT1cQ8MUXJUJUXhNLOXW2AV9KuLO5HhI"/>
+</div>
+<div class="flex-grow flex flex-col">
+<div class="flex items-center justify-between mb-2">
+<h3 class="font-headline-md text-headline-md text-on-surface">Domates</h3>
+<span class="bg-tertiary-container/20 text-tertiary px-3 py-1 rounded-full font-label-md text-[12px]">Sebze</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">Meyve tutum döneminde su stresine karşı oldukça duyarlıdır.</p>
+<div class="mt-auto bg-surface p-4 rounded-lg border border-outline-variant/40 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">water_drop</span>
+<span class="font-body-md text-on-surface font-medium">Sulama Başlangıç Sınırı</span>
+</div>
+<span class="font-label-md text-label-md text-primary bg-primary/10 px-3 py-1 rounded-md">%70</span>
+</div>
+</div>
+</div>
+<!-- Kart 4: Marul -->
+<div class="bg-surface-container-lowest rounded-xl p-4 shadow-[0_4px_20px_rgba(44,62,80,0.08)] border border-outline-variant/30 transition-transform hover:-translate-y-1 duration-300 flex flex-col h-full">
+<div class="h-48 w-full rounded-lg overflow-hidden mb-4">
+<img class="w-full h-full object-cover" data-alt="Fresh green lettuce growing in a hydroponic farm." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAN6A7_B0T56AeIQOMD0IcpkswXHBfAY3-ysKrA4rDc_Inxg3O_9apUsAhQKP6mkRCJ8J1Hc1Jjm1BXKyBamFr5uK6P44k-adkpEvxRh-MVvKEA-VnEEY1-Q0kB1koi7UFxIZHLV2g0dL3tRRIC3hTlxQ9FUCwzdppDInkQO-evlo4uIt4eo9J3IeOqmSuP26Prja0ooPjQPGJ_tpPYxer6dTch2QB3XrdlNScpOHjRt3SGrLVDZe-v9i3fcaQXGNxaqRHrHzbvDbo"/>
+</div>
+<div class="flex-grow flex flex-col">
+<div class="flex items-center justify-between mb-2">
+<h3 class="font-headline-md text-headline-md text-on-surface">Marul</h3>
+<span class="bg-tertiary-container/20 text-tertiary px-3 py-1 rounded-full font-label-md text-[12px]">Sebze</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">Hızlı büyüme evresinde yüksek oranda neme ihtiyaç duyan yapraklı bitki.</p>
+<div class="mt-auto bg-surface p-4 rounded-lg border border-outline-variant/40 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">water_drop</span>
+<span class="font-body-md text-on-surface font-medium">Sulama Başlangıç Sınırı</span>
+</div>
+<span class="font-label-md text-label-md text-primary bg-primary/10 px-3 py-1 rounded-md">%80</span>
+</div>
+</div>
+</div>
+<!-- Kart 5: Narenciye -->
+<div class="bg-surface-container-lowest rounded-xl p-4 shadow-[0_4px_20px_rgba(44,62,80,0.08)] border border-outline-variant/30 transition-transform hover:-translate-y-1 duration-300 flex flex-col h-full">
+<div class="h-48 w-full rounded-lg overflow-hidden mb-4">
+<img class="w-full h-full object-cover" data-alt="Fresh oranges growing on a tree." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEK-3aiZAFQ0Z1EEVpXaUbmgKU4YyTf9YnJnnGtUr2AhZm-mYvI4pEMVceK5Hj6QSneP4adc1rUKghdB2SJWsvWR5to3mRYYjF6EKXD_jZ4rAdrv50V7pD_TwBEcyAcFlnQ9aS6GRwEUIeIgYCW46u9B7Z5Ywq-UnEV1Vj3Jq02VJkzdltAOvJKZjgTmYJZB-lHMvpHwTtYAgmxSFAU0bAAtShqXMhDrJHGKqeWAiRa9qg6CyiDJMc4ja_1Q_Sr27wvIFTMtm2tWw"/>
+</div>
+<div class="flex-grow flex flex-col">
+<div class="flex items-center justify-between mb-2">
+<h3 class="font-headline-md text-headline-md text-on-surface">Narenciye (Limon/Portakal)</h3>
+<span class="bg-tertiary-container/20 text-tertiary px-3 py-1 rounded-full font-label-md text-[12px]">Meyve/Ağaç</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">Orta düzeyde nem toleransı ile dengeli sulama gerektiren turunçgiller.</p>
+<div class="mt-auto bg-surface p-4 rounded-lg border border-outline-variant/40 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">water_drop</span>
+<span class="font-body-md text-on-surface font-medium">Sulama Başlangıç Sınırı</span>
+</div>
+<span class="font-label-md text-label-md text-primary bg-primary/10 px-3 py-1 rounded-md">%50</span>
+</div>
+</div>
+</div>
+<!-- Kart 6: Lavanta -->
+<div class="bg-surface-container-lowest rounded-xl p-4 shadow-[0_4px_20px_rgba(44,62,80,0.08)] border border-outline-variant/30 transition-transform hover:-translate-y-1 duration-300 flex flex-col h-full">
+<div class="h-48 w-full rounded-lg overflow-hidden mb-4">
+<img class="w-full h-full object-cover" data-alt="Field of blooming lavender flowers." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvCKTKaAA8SZ7UmFC7qRwK0CgjX9qvsUq5QRckOwSp8PY7h2WB7qmWpY1TRcrga2YgJ4A5DNlCep3OC22m_Y2AA2S3W9UC_qR3eeUCGch2Xb4eNepPME_g-0J_-OVlcw3_8fXJWJZQAu_02n8dOUa3-xWdVJjvqOtJrLEhosJJPOC_Ptrvt-3mZwjMfMKJD3QjLB19gakP2NdpWy9LoX2pK_QRBrMD_QpyROUO2NbYGayh1QweWqImecu7602MRP1u2JUpF_3LXmw"/>
+</div>
+<div class="flex-grow flex flex-col">
+<div class="flex items-center justify-between mb-2">
+<h3 class="font-headline-md text-headline-md text-on-surface">Lavanta</h3>
+<span class="bg-tertiary-container/20 text-tertiary px-3 py-1 rounded-full font-label-md text-[12px]">Bitki</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">Düşük nem ortamında en iyi gelişimi gösteren, fazla suya hassas aromatik bitki.</p>
+<div class="mt-auto bg-surface p-4 rounded-lg border border-outline-variant/40 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">water_drop</span>
+<span class="font-body-md text-on-surface font-medium">Sulama Başlangıç Sınırı</span>
+</div>
+<span class="font-label-md text-label-md text-primary bg-primary/10 px-3 py-1 rounded-md">%30</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Donanım Envanteri -->
+<section class="py-section-padding px-6 bg-surface-container-low" id="donanim">
+<div class="max-w-container-max mx-auto">
+<div class="mb-stack-lg text-center">
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Donanım Envanteri</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2 max-w-2xl mx-auto">Prototip geliştirilmesinde kullanılan temel elektronik komponentler ve sensörler.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<!-- Arduino Uno -->
+<div class="bg-surface-container-lowest rounded-xl p-5 shadow-[0_4px_20px_rgba(44,62,80,0.08)] border border-outline-variant/30 flex flex-col gap-4 h-full">
+<div class="w-full h-32 shrink-0 bg-surface rounded-lg p-2 flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-contain filter mix-blend-multiply" data-alt="Arduino Uno microcontroller board." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1rwqyWFUF2UqKiYACe4y10nr3JmvwpffYneyoCNsI1-XzQhEDEUWEWmN0asHTBBGk-oaq9UfhEhiE86pjk5ZneATZfa4ncsY9fb3eeMjc_AYbT1HshUt4oo2QHkEIKHV0ct7mj1zvN2g6yhy7icDPLt3tYNjF6sRWncpDkNNxb2Md2aL8R7YIOk6eN74PJsLyKCDbDhhzOFaLUv_KJXR2U7VGh2TKQVe8GRKdJIVxLZ4xpQkZDN0BQCgHfllt3oyCdNqclFg6m10"/>
+</div>
+<div class="flex flex-col h-full">
+<h4 class="font-headline-md text-[18px] leading-[24px] text-on-surface mb-2">Arduino Uno</h4>
+<p class="font-body-md text-[14px] leading-[20px] text-on-surface-variant mb-4">Ana kontrol ünitesi.</p>
+</div>
+</div>
+<!-- DHT22 -->
+<div class="bg-surface-container-lowest rounded-xl p-5 shadow-[0_4px_20px_rgba(44,62,80,0.08)] border border-outline-variant/30 flex flex-col gap-4 h-full">
+<div class="w-full h-32 shrink-0 bg-surface rounded-lg p-2 flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-contain" data-alt="DHT22 Sensor module." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxOlbYh-ysvtQ52ezeL9nwje-ETL1_WY4yhahz7SujmfTuVPuQEoSeduG1yLaurwZg6aigV-Xexj5cUzVD1BxHNuMm6x3fxHoH6gqJPdYOaELDW49_vbn1FTiUgWOPYq-ESCnVqcAlVM1kputElrLJjuGCQcp20b8X3yjwphZYLunDtMM05s2CCrPeBEj7WafcF9hrkybU3V0nf9uxGDFAw0D66lVJ_YiwCSEATuCpi6DiP0NLvD3mMRh1F-4xSjXBLrgtin6Cs1E"/>
+</div>
+<div class="flex flex-col h-full">
+<h4 class="font-headline-md text-[18px] leading-[24px] text-on-surface mb-2">DHT22</h4>
+<p class="font-body-md text-[14px] leading-[20px] text-on-surface-variant mb-4">Hassas sıcaklık ve hava nemi ölçümü.</p>
+</div>
+</div>
+<!-- Toprak Nem Sensörü -->
+<div class="bg-surface-container-lowest rounded-xl p-5 shadow-[0_4px_20px_rgba(44,62,80,0.08)] border border-outline-variant/30 flex flex-col gap-4 h-full">
+<div class="w-full h-32 shrink-0 bg-surface rounded-lg p-2 flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-contain" data-alt="Soil moisture sensor for electronics." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDH-RubJpH8bFNggrs8b4poIuaMgUVoLsxxUlxOy-o_8vEREHAtvrpmgjaYFZNP9soCSKnLeX0fweMKd8Ge1eVMEAK8qGyG1NwJTGDr6jTqThstsFdqPyRCNd2oMnWe92CCa3bmn9plb3OVqhriuqCEe5AtDypjZPDpJPxF_p-uInA8CaVYh6x5AjYUZDlvAWCQcjNvxZ2x1xVqaxHGpPbyMXWp0PSoIiryknNcI3skb9CMd9H-we_0iQTX4h99avW1y3vUIbTql_0"/>
+</div>
+<div class="flex flex-col h-full">
+<h4 class="font-headline-md text-[18px] leading-[24px] text-on-surface mb-2">Toprak Nem Sensörü</h4>
+<p class="font-body-md text-[14px] leading-[20px] text-on-surface-variant mb-4">Toprak iletkenliği üzerinden nem takibi.</p>
+</div>
+</div>
+<!-- SD Kart Modülü -->
+<div class="bg-surface-container-lowest rounded-xl p-5 shadow-[0_4px_20px_rgba(44,62,80,0.08)] border border-outline-variant/30 flex flex-col gap-4 h-full">
+<div class="w-full h-32 shrink-0 bg-surface rounded-lg p-2 flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-contain" data-alt="Micro SD card reader module." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPxKan7bbA_SaeYr20XeOfjYaY9e530b-XkVdqY0JPJyVeEMrSDT4i_iXHNHZBh-yYj_IHZTqSIy4W7dIN-RiTGJjWGBtmHAzq4ui95aRLwq5q0wW40Aq9RkU8fyrTDJpqxKP6txkjl6hRkwhoBBibwlXZmu9uq3_3pxT5VelIO5KioMImhgRDLLRLfINcwsi9BTq4n5qzwjLEOhtnHrps-dafe9bltpBKsgyxfO_5gxH7YZ-RwB96TYSpGomn2A6CtNiGUt-K1W4"/>
+</div>
+<div class="flex flex-col h-full">
+<h4 class="font-headline-md text-[18px] leading-[24px] text-on-surface mb-2">SD Kart Modülü</h4>
+<p class="font-body-md text-[14px] leading-[20px] text-on-surface-variant mb-4">Çevrimdışı veri kaydı ve raporlama.</p>
+</div>
+</div>
+<!-- I2C LCD Ekran -->
+<div class="bg-surface-container-lowest rounded-xl p-5 shadow-[0_4px_20px_rgba(44,62,80,0.08)] border border-outline-variant/30 flex flex-col gap-4 h-full">
+<div class="w-full h-32 shrink-0 bg-surface rounded-lg p-2 flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-contain" data-alt="16x2 character LCD display with I2C module." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtoRk9wYpyxyzAhd1d_fsC78P4nO68UUAFvKZvJF_uGizaHVoFflzNvqUThkLm2X2yEHHbVgkh-Y5DPkdYp9neCS_QKizxRzKffAU8HNeXrXyFVrxSsxlF4dLVqdVN0kqR8jwH_9o-GEwVXNKEDaE4gaAU8wttZKs5TAcZSCA0eD7TgB7m326aDMLrugyDNPUPm62TgLfNwdNKmBLE3clg_kS6sTp2HPZdPJMtu7yDtAMAa3jcv6yVv1h5xRB-BC-ahcw018v2eMc"/>
+</div>
+<div class="flex flex-col h-full">
+<h4 class="font-headline-md text-[18px] leading-[24px] text-on-surface mb-2">I2C LCD Ekran</h4>
+<p class="font-body-md text-[14px] leading-[20px] text-on-surface-variant mb-4">16x2 karakterli anlık durum paneli.</p>
+</div>
+</div>
+<!-- MOSFET Sürücü Kartı -->
+<div class="bg-surface-container-lowest rounded-xl p-5 shadow-[0_4px_20px_rgba(44,62,80,0.08)] border border-outline-variant/30 flex flex-col gap-4 h-full">
+<div class="w-full h-32 shrink-0 bg-surface rounded-lg p-2 flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-contain" data-alt="MOSFET driver module for power switching." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAY-5x4l9E5boZzBKxX6xSPyCJs9078YRZAHZvmejao-zbO-2EEeHWJTkt4YIv9Xz8Xb4tyRBftNbxgFLgJca2eqz9gNJfF5OTR70ufhb-Jy8rRqxJHMphMTegNPT8a-rzVCktwrAq6RgZMe-2rKNy_0QnayaEyZ4GGddGGUGKr0zin0w7c97Qo0ALzJgr8KdGH6GAtFR2u7p8RqNzxRY79tAeNd-iz0DQ3YP7rrJd_o5Vnbwa6lZ0MFIaEsaI4v0VWahKHo6QCW6k"/>
+</div>
+<div class="flex flex-col h-full">
+<h4 class="font-headline-md text-[18px] leading-[24px] text-on-surface mb-2">MOSFET Sürücü Kartı</h4>
+<p class="font-body-md text-[14px] leading-[20px] text-on-surface-variant mb-4">Pompa güç yönetimi ve anahtarlama.</p>
+</div>
+</div>
+<!-- 5V Su Pompası -->
+<div class="bg-surface-container-lowest rounded-xl p-5 shadow-[0_4px_20px_rgba(44,62,80,0.08)] border border-outline-variant/30 flex flex-col gap-4 h-full">
+<div class="w-full h-32 shrink-0 bg-surface rounded-lg p-2 flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-contain" data-alt="Small 5V DC submersible water pump." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFm-4ggoocb9WvnY-lzEg58IBf9RFrDjqYrofc7D5ZvtlBs3w_9d3tsLxUsIYsf1j0rHbEGSu5bnpGMIRvrveKNcRH3ODpBIzuTEhEYU5syZWQRIMQl0jh66l9QBrVo6D0AalPl82VsK5s9WNsZ7-a3JcEmx0F3Pqe9cHJHrju38iZ6d7AbdDhVUKfvrPUk5FdtKy3hkzy5iVff-wN-91bHWlU6hAlB5qsCU4OPPJgGbbuuagwTwxV6QJkB_-kY9fs1VzfMwasA9E"/>
+</div>
+<div class="flex flex-col h-full">
+<h4 class="font-headline-md text-[18px] leading-[24px] text-on-surface mb-2">5V Su Pompası</h4>
+<p class="font-body-md text-[14px] leading-[20px] text-on-surface-variant mb-4">Aktüatör / Sulama birimi.</p>
+</div>
+</div>
+<!-- HC-SR04 Ultrasonik Sensör -->
+<div class="bg-surface-container-lowest rounded-xl p-5 shadow-[0_4px_20px_rgba(44,62,80,0.08)] border border-outline-variant/30 flex flex-col gap-4 h-full">
+<div class="w-full h-32 shrink-0 bg-surface rounded-lg p-2 flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-contain" data-alt="HC-SR04 ultrasonic distance sensor module." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDi1qlpB_AZhZfNmPXDdVwItwk3C-t8zGtGnaz_XPEo45iZj4eC9XP5UtUdMW4OaOj6wmIfCBcfUWA-a1-VrJMotD_qRWMZv4vPRU6FbmKZNITepU_BHxQDGQuyhx7NMP6DO5RAMWTbBjPCjZBuVVd8tFdt74X75G9_XX1LokckvM9B99vOZp5X6Pvvh7PapbKWYG5VC_DrqtlFAZZYWyKaOp3I4A4nJxMFc4E9BuJJK6aeSFYLWPuEaCX5sMoOB7SImHTeM6_Bn68"/>
+</div>
+<div class="flex flex-col h-full">
+<h4 class="font-headline-md text-[18px] leading-[24px] text-on-surface mb-2">HC-SR04 Ultrasonik Sensör</h4>
+<p class="font-body-md text-[14px] leading-[20px] text-on-surface-variant mb-4">Su deposu seviye kontrolü.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Akademik Dökümantasyon CTA -->
+<section class="py-section-padding px-6 bg-surface">
+<div class="max-w-[1000px] mx-auto bg-surface-container-low rounded-2xl p-8 md:p-12 border border-outline-variant/30 shadow-[0_4px_20px_rgba(44,62,80,0.05)] relative overflow-hidden flex flex-col md:flex-row items-center gap-8">
+<!-- Decorative background elements -->
+<div class="absolute -right-20 -top-20 w-64 h-64 bg-primary-container/10 rounded-full blur-3xl"></div>
+<div class="absolute -left-20 -bottom-20 w-64 h-64 bg-tertiary-container/10 rounded-full blur-3xl"></div>
+<div class="flex-1 relative z-10 text-center md:text-left">
+<div class="inline-flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary text-[20px]">school</span>
+<span class="font-label-md text-label-md text-primary tracking-widest uppercase">Akademik Yayın</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-4">Akıllı Tarımda Otonom Sulama Sistemleri ve Mikrodenetleyici Uygulamaları</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-0">
+                        Bu proje, bitki nem ihtiyaçlarının sensör füzyonu ile anlık olarak analiz edilip, minimum su israfı ile optimum büyüme koşullarının sağlanmasını amaçlayan akademik bir araştırmanın prototip çıktısıdır. Tüm algoritma detayları, devre şemaları ve test sonuçları tez dokümanında mevcuttur.
+                    </p>
+</div>
+<div class="shrink-0 relative z-10 w-full md:w-auto flex justify-center">
+<button class="group flex flex-col items-center gap-3 bg-primary-container hover:bg-primary text-white p-8 rounded-xl transition-all duration-300 shadow-lg shadow-primary-container/20 hover:-translate-y-1 w-full md:w-64">
+<div class="bg-white/20 p-4 rounded-full mb-2 group-hover:scale-110 transition-transform duration-300">
+<span class="material-symbols-outlined text-5xl">picture_as_pdf</span>
+</div>
+<span class="font-headline-md text-[18px] text-center font-semibold">Bitirme Tezi Tam Metnini İndir</span>
+<span class="font-label-md text-[12px] opacity-80 mt-1">PDF, 4.2 MB</span>
+</button>
+</div>
+</div>
+</section>
+<!-- İletişim Formu -->
+<section class="py-section-padding px-6 bg-surface-bright" id="iletisim">
+<div class="max-w-[800px] mx-auto">
+<div class="mb-stack-lg text-center">
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Geliştiriciye Ulaşın</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2">Proje hakkında sorularınız veya işbirlikleri için iletişim formunu kullanabilirsiniz.</p>
+</div>
+<form class="bg-surface-container-lowest p-8 rounded-xl shadow-[0_4px_20px_rgba(44,62,80,0.05)] border border-outline-variant/30 flex flex-col gap-6">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Ad Soyad -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-2" for="name">Ad Soyad</label>
+<input class="w-full bg-surface border border-[#d1d5db] rounded-lg px-4 py-3 font-body-md text-on-surface focus:outline-none focus:border-primary-container focus:ring-4 focus:ring-primary-container/20 transition-all placeholder:text-on-surface-variant/50" id="name" name="name" placeholder="Adınız Soyadınız" type="text"/>
+</div>
+<!-- E-posta -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-2" for="email">E-posta Adresi</label>
+<input class="w-full bg-surface border border-[#d1d5db] rounded-lg px-4 py-3 font-body-md text-on-surface focus:outline-none focus:border-primary-container focus:ring-4 focus:ring-primary-container/20 transition-all placeholder:text-on-surface-variant/50" id="email" name="email" placeholder="ornek@email.com" type="email"/>
+</div>
+</div>
+<!-- Konu -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-2" for="subject">Konu</label>
+<input class="w-full bg-surface border border-[#d1d5db] rounded-lg px-4 py-3 font-body-md text-on-surface focus:outline-none focus:border-primary-container focus:ring-4 focus:ring-primary-container/20 transition-all placeholder:text-on-surface-variant/50" id="subject" name="subject" placeholder="Mesajınızın konusu" type="text"/>
+</div>
+<!-- Mesaj -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-2" for="message">Mesajınız</label>
+<textarea class="w-full bg-surface border border-[#d1d5db] rounded-lg px-4 py-3 font-body-md text-on-surface focus:outline-none focus:border-primary-container focus:ring-4 focus:ring-primary-container/20 transition-all placeholder:text-on-surface-variant/50 resize-y" id="message" name="message" placeholder="Detaylı mesajınızı buraya yazabilirsiniz..." rows="5"></textarea>
+</div>
+<div class="flex justify-end pt-2">
+<button class="flex items-center gap-2 bg-on-surface text-surface px-8 py-3 rounded-lg hover:bg-on-surface-variant transition-colors font-body-md font-semibold w-full md:w-auto justify-center" type="submit">
+<span class="material-symbols-outlined text-[20px]">send</span>
+                            Mesajı Gönder
+                        </button>
+</div>
+</form>
+</div>
+</section>
+</main>
+<!-- Shared Component: Footer -->
+<footer class="w-full bg-surface-container dark:bg-inverse-surface">
+<div class="max-w-[1280px] mx-auto px-6 py-12 flex flex-col md:flex-row justify-between items-center gap-8">
+<div class="text-center md:text-left">
+<div class="font-headline-md text-on-surface dark:text-inverse-on-surface font-headline-md font-bold text-headline-md mb-2">
+                    Akıllı Sulama
+                </div>
+<div class="font-label-md text-label-md text-on-secondary-container dark:text-secondary-fixed-dim">
+                    © 2026 Mehmet Bilal İnce - Bitirme Projesi
+                </div>
+</div>
+<nav class="flex flex-wrap items-center justify-center gap-6">
+<a class="text-on-secondary-container dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-colors font-label-md text-label-md opacity-100 hover:opacity-80" href="#hakkinda">Hakkında</a>
+<a class="text-on-secondary-container dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-colors font-label-md text-label-md opacity-100 hover:opacity-80" href="#iletisim">İletişim</a>
+<a class="text-on-secondary-container dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-colors font-label-md text-label-md opacity-100 hover:opacity-80 flex items-center gap-1" href="https://github.com" target="_blank">
+<span class="material-symbols-outlined text-[18px]">code</span>
+                    GitHub
+                </a>
+</nav>
+</div>
+</footer>
+</body></html>
