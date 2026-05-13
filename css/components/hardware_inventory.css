@@ -1,0 +1,10 @@
+/* 
+ * Donanım Envanteri Bileşeni Stilleri
+ * Sorumluluk: Donanım kartlarının üzerine gelindiğinde (hover) havaya kalkma animasyonu.
+ */
+
+.hover-lift:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(44, 62, 80, 0.15);
+    border-color: var(--primary) !important;
+}

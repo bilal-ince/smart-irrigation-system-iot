@@ -1,0 +1,13 @@
+/* 
+ * Hero (Ana Karşılama) Bileşeni Stilleri
+ * Sorumluluk: Sayfaya ilk girişteki animasyonlar ve özel metin kaydırma ayarları.
+ */
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: .5; }
+}
+
+.text-balance { 
+    text-wrap: balance; 
+}

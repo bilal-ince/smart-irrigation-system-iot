@@ -22,5 +22,5 @@ Bu portal, akıllı sulama sisteminin dijital rehberidir. Projenin teknik dökü
 * `contact.php`: İletişim formu ve mail gönderim modülü.
 
 ---
-**Geliştirici:** Mehmet Bilal İnce  
+**Geliştirici:** Mehmet Bilal İnce - Enis Kılıç  
 **Proje Durumu:** Web Arayüzü Geliştirme Aşamasında 🍓🚀|

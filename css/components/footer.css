@@ -1,0 +1,17 @@
+/* 
+ * Footer (Alt Bilgi) Bileşeni Stilleri
+ * Sorumluluk: Sayfa altındaki bağlantıların hover (üzerine gelme) animasyonları ve opaklık geçişleri.
+ */
+
+.hover-opacity-80 { 
+    transition: opacity 0.3s; 
+    opacity: 1; 
+}
+
+.hover-opacity-80:hover { 
+    opacity: 0.8; 
+}
+
+footer .text-on-surface-variant:hover { 
+    color: var(--primary) !important; 
+}

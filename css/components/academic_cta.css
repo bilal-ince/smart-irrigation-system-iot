@@ -1,0 +1,8 @@
+/* 
+ * Akademik CTA (Call to Action) Bileşeni Stilleri
+ * Sorumluluk: Akademik yayın indirme butonunun animasyonları ve özel tasarım ayarları.
+ */
+
+.btn-primary-custom:hover > div { 
+    transform: scale(1.1); 
+}

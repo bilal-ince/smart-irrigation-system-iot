@@ -1,0 +1,15 @@
+/* 
+ * Proje Galerisi Bileşeni Stilleri
+ * Sorumluluk: Bootstrap Carousel (Slider) göstergelerinin kurumsal temaya uygun hale getirilmesi.
+ */
+
+.carousel-indicators [data-bs-target] {
+    background-color: var(--primary);
+    opacity: 0.4;
+    border-radius: 4px;
+    height: 4px;
+    transition: opacity 0.3s ease;
+}
+.carousel-indicators .active {
+    opacity: 1;
+}

@@ -1,3 +1,5 @@
+<!-- Bitki Nem Rehberi Bölümü Başlangıcı -->
+<!-- Sorumluluk: Sistemin desteklediği örnek bitki türlerini ve nem gereksinimlerini listelemek. -->
 <section id="bitki-rehberi" class="section-padding bg-surface px-3">
     <div class="custom-container">
         <div class="mb-5 d-flex flex-column gap-2 flex-md-row align-items-md-end justify-content-md-between">
@@ -83,3 +85,4 @@
         </div>
     </div>
 </section>
+<!-- Bitki Nem Rehberi Bölümü Sonu -->

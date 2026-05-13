@@ -1,10 +1,15 @@
+<!-- Akademik CTA (Call to Action) Bölümü Başlangıcı -->
+<!-- Sorumluluk: Kullanıcılara bitirme tezini indirme imkanı sunan vurgulu alan. -->
 <section class="section-padding bg-surface px-3">
     <div class="custom-container" style="max-width: 1000px;">
+        <!-- Kart Konteyneri (Gölge ve Kenarlık Efektleri) -->
         <div class="bg-surface-container-low rounded-4 p-4 p-md-5 border border-outline-variant shadow-sm position-relative overflow-hidden d-flex flex-column flex-md-row align-items-center gap-4 gap-md-5">
-            <!-- Decorative background elements -->
+            
+            <!-- Dekoratif Arkaplan Blur Efektleri -->
             <div class="position-absolute rounded-circle bg-primary-container" style="width: 256px; height: 256px; filter: blur(64px); opacity: 0.1; right: -80px; top: -80px;"></div>
             <div class="position-absolute rounded-circle bg-tertiary-container" style="width: 256px; height: 256px; filter: blur(64px); opacity: 0.1; left: -80px; bottom: -80px;"></div>
             
+            <!-- İçerik Alanı (Başlık ve Açıklama) -->
             <div class="flex-grow-1 position-relative z-1 text-center text-md-start">
                 <div class="d-inline-flex align-items-center gap-2 mb-3">
                     <span class="material-symbols-outlined text-primary fs-5">school</span>
@@ -16,6 +21,7 @@
                 </p>
             </div>
             
+            <!-- Buton Alanı -->
             <div class="flex-shrink-0 position-relative z-1 w-100" style="max-width: 280px;">
                 <button class="d-flex flex-column align-items-center gap-3 btn-primary-custom w-100 p-4 rounded-4 shadow-lg hover-lift" style="box-shadow: 0 10px 25px rgba(39, 174, 96, 0.2) !important;">
                     <div class="rounded-circle d-flex align-items-center justify-content-center mb-2" style="background: rgba(255,255,255,0.2); width: 80px; height: 80px; transition: transform 0.3s ease;">
@@ -25,10 +31,8 @@
                     <span class="font-label-md text-white opacity-75 mt-1" style="font-size: 12px;">PDF, 4.2 MB</span>
                 </button>
             </div>
+            
         </div>
     </div>
 </section>
-
-<style>
-.btn-primary-custom:hover > div { transform: scale(1.1); }
-</style>
+<!-- Akademik CTA Bölümü Sonu -->

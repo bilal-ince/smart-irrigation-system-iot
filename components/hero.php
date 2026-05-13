@@ -1,3 +1,5 @@
+<!-- Hero (Ana Karşılama) Bölümü Başlangıcı -->
+<!-- Sorumluluk: Ziyaretçiyi karşılayan, projenin ana amacını ve durumunu özetleyen üst bölüm. -->
 <section id="hakkinda" class="position-relative w-100 d-flex align-items-center justify-content-center overflow-hidden section-padding px-3" style="min-height: 600px;">
     <!-- Blurred Background Image -->
     <div class="position-absolute top-0 start-0 w-100 h-100 z-0">
@@ -35,10 +37,4 @@
     </div>
 </section>
 
-<style>
-@keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: .5; }
-}
-.text-balance { text-wrap: balance; }
-</style>
+<!-- Hero (Ana Karşılama) Bölümü Sonu -->
