@@ -26,10 +26,26 @@
         </p>
         
         <div class="d-flex flex-wrap align-items-center justify-content-center gap-3 pt-3">
-            <button class="d-flex align-items-center gap-2 btn-primary-custom px-4 py-3 font-body-md shadow">
-                <span class="material-symbols-outlined">description</span>
-                Bitirme Tezi Tam Metnini İndir
-            </button>
+            <div class="dropdown">
+                <button class="btn btn-primary-custom d-flex align-items-center gap-2 px-4 py-3 font-body-md shadow dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <span class="material-symbols-outlined">description</span>
+                    Bitirme Tezi Tam Metnini İndir
+                </button>
+                <ul class="dropdown-menu shadow border-0 w-100" style="border-radius: 12px; margin-top: 8px;">
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center gap-2 py-2" href="document/Bitirme Projesi .pdf" download>
+                            <span class="material-symbols-outlined text-danger fs-5">picture_as_pdf</span>
+                            PDF Formatında İndir
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center gap-2 py-2" href="document/Bitirme Projesi .docx" download>
+                            <span class="material-symbols-outlined text-primary fs-5">description</span>
+                            DOCX Formatında İndir
+                        </a>
+                    </li>
+                </ul>
+            </div>
             <a href="#bitki-rehberi" class="d-flex align-items-center gap-2 btn-outline-custom text-decoration-none px-4 py-3 font-body-md">
                 Sistemi Keşfet
             </a>

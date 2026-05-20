@@ -1,5 +1,5 @@
-<?php
-$file = '/Applications/XAMPP/xamppfiles/htdocs/smart-irrigation-system-iot/img/favicon.png';
+    <?php
+$file = '/Applications/XAMPP/xamppfiles/htdocs/smart-irrigation-system-iot/favicon.png';
 $img = imagecreatefromjpeg($file);
 if (!$img) {
     die("Resim yuklenemedi");

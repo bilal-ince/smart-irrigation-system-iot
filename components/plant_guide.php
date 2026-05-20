@@ -17,7 +17,8 @@
                     "type" => "Meyve",
                     "desc" => "Yüzey köklü yapısı sebebiyle düzenli ve hassas sulama gerektirir.",
                     "humidity" => "%65",
-                    "img" => "https://lh3.googleusercontent.com/aida-public/AB6AXuDsv73KXTl8XYBy9Ul0GFtgj2Of0QFesme3l0TS5BA8etNuR3QLd8hR-N2Q3vHcNVwWwM9rLzMibz7qdzwvZt7hi9q4TroWBNlYCVvyc0ej4u1ZNI-JLUxGUz2MvU0RXrEt26BSSfRkKUXVwq6s9bCDbOAQIo6qdF7yDL5hK07qh0S5_roPY1puT8AA89JNmieLLFQ4aPAu6Ogy3UTuQF0fuwEXJRAqFnK7wyTi3dav6CXbWZtKXhOl7LKv21AWkiddaXTM3AyCG74"
+                    "img" => "envanter-img/cilek.png",
+                    "link" => "https://www.bauhaus.com.tr/cilek-60304362"
                 ],
                 [
                     "title" => "Zeytin",
@@ -57,12 +58,20 @@
             ];
 
             foreach($plants as $p) {
+                $href = !empty($p["link"]) ? $p["link"] : "#";
+                $target = !empty($p["link"]) ? 'target="_blank"' : '';
+
                 echo '
                 <div class="col-12 col-md-6 col-lg-4">
-                    <div class="bg-surface-container-lowest rounded-3 p-3 shadow-soft border border-outline-variant h-100 d-flex flex-column hover-lift">
-                        <div class="w-100 rounded-3 overflow-hidden mb-3" style="height: 192px;">
-                            <img src="'.$p["img"].'" alt="'.$p["title"].'" class="w-100 h-100 object-fit-cover">
-                        </div>
+                    <a href="'.$href.'" '.$target.' class="text-decoration-none">
+                        <div class="bg-surface-container-lowest rounded-3 p-3 shadow-soft border border-outline-variant h-100 d-flex flex-column hover-lift">
+                            <div class="w-100 rounded-3 overflow-hidden mb-3 position-relative" style="height: 192px;">
+                                <img src="'.$p["img"].'" alt="'.$p["title"].'" class="w-100 h-100 object-fit-cover">';
+                                if (!empty($p["link"])) {
+                                    echo '<div class="position-absolute top-0 end-0 p-2"><span class="material-symbols-outlined text-white rounded-circle p-1" style="background: rgba(0,0,0,0.5); font-size: 16px;">open_in_new</span></div>';
+                                }
+                echo '
+                            </div>
                         <div class="flex-grow-1 d-flex flex-column">
                             <div class="d-flex align-items-center justify-content-between mb-2">
                                 <h3 class="font-headline-md text-on-surface m-0" style="font-size: 20px;">'.$p["title"].'</h3>
@@ -78,7 +87,8 @@
                                 <span class="font-label-md text-primary px-3 py-1 rounded-2" style="background-color: rgba(0,109,55,0.1);">'.$p["humidity"].'</span>
                             </div>
                         </div>
-                    </div>
+                        </div>
+                    </a>
                 </div>';
             }
             ?>
