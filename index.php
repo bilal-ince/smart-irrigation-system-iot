@@ -52,34 +52,61 @@ $site_title = "Akıllı Sulama - Bitirme Projesi";
         document.addEventListener('DOMContentLoaded', function() {
             const sections = document.querySelectorAll('section[id]');
             const navLinks = document.querySelectorAll('.nav-link-custom');
-            
+            const mobileMenuEl = document.getElementById('mobileMenu');
+            const mobileOffcanvas = mobileMenuEl
+                ? bootstrap.Offcanvas.getOrCreateInstance(mobileMenuEl)
+                : null;
+
             function updateActiveLink() {
                 let current = '';
                 const scrollY = window.pageYOffset;
-                
-                sections.forEach(section => {
-                    const sectionTop = section.offsetTop;
-                    const sectionHeight = section.clientHeight;
-                    if (scrollY >= (sectionTop - 150)) {
+
+                sections.forEach(function(section) {
+                    if (scrollY >= section.offsetTop - 150) {
                         current = section.getAttribute('id');
                     }
                 });
-                
-                navLinks.forEach(link => {
+
+                navLinks.forEach(function(link) {
                     link.classList.remove('active');
                     if (link.getAttribute('href') === '#' + current) {
                         link.classList.add('active');
                     }
                 });
             }
-            
+
             window.addEventListener('scroll', updateActiveLink);
-            updateActiveLink(); // Run once on load
-            
-            navLinks.forEach(link => {
-                link.addEventListener('click', function() {
-                    navLinks.forEach(l => l.classList.remove('active'));
-                    this.classList.add('active');
+            updateActiveLink();
+
+            navLinks.forEach(function(link) {
+                link.addEventListener('click', function(e) {
+                    const targetHref = this.getAttribute('href');
+                    if (!targetHref || !targetHref.startsWith('#')) return;
+
+                    const isMobileLink = this.closest('#mobileMenu') !== null;
+
+                    if (isMobileLink && mobileOffcanvas) {
+                        e.preventDefault();
+
+                        // Önce aktif sınıfı güncelle
+                        navLinks.forEach(function(l) { l.classList.remove('active'); });
+                        document.querySelectorAll('.nav-link-custom[href="' + targetHref + '"]')
+                            .forEach(function(l) { l.classList.add('active'); });
+
+                        // Offcanvas kapandıktan sonra bölüme git
+                        mobileMenuEl.addEventListener('hidden.bs.offcanvas', function scrollAfterClose() {
+                            mobileMenuEl.removeEventListener('hidden.bs.offcanvas', scrollAfterClose);
+                            const target = document.querySelector(targetHref);
+                            if (target) {
+                                target.scrollIntoView({ behavior: 'smooth' });
+                            }
+                        });
+
+                        mobileOffcanvas.hide();
+                    } else {
+                        navLinks.forEach(function(l) { l.classList.remove('active'); });
+                        this.classList.add('active');
+                    }
                 });
             });
         });

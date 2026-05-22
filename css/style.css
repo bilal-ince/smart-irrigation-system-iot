@@ -167,6 +167,26 @@ body {
     border-bottom: 2px solid var(--primary);
 }
 
+/* Mobile Offcanvas Nav */
+.mobile-nav-link {
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+.mobile-nav-link:hover {
+    background-color: var(--surface-container-low);
+    color: var(--primary);
+}
+.mobile-nav-link.active {
+    background-color: var(--surface-container);
+    color: var(--primary);
+    border-bottom: none;
+}
+#mobileMenu {
+    width: min(320px, 85vw);
+}
+#mobileMenu .offcanvas-body {
+    overflow-y: auto;
+}
+
 /* Form Inputs */
 .form-control-custom {
     background-color: var(--surface);
